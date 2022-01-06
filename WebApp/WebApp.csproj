@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <!--<ItemGroup>
+    <Content Remove="Pages\EditCategoryComponent.razor" />
+  </ItemGroup>-->
+
+  <!--<ItemGroup>
+    <Content Remove="Pages\AddCategoryComponent.razor" />
+  </ItemGroup>-->
+
+  <!--<ItemGroup>
     <Content Remove="Pages\CategoriesComponent.razor" />
   </ItemGroup>-->
 
@@ -19,8 +27,26 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\AddCategoryComponent.razor" />
     <_ContentIncludedByDefault Remove="Pages\CategoriesComponent.razor" />
+    <_ContentIncludedByDefault Remove="Pages\EditCategoryComponent.razor" />
   </ItemGroup>
+
+  <!--<ItemGroup>
+    <UpToDateCheckInput Remove="Pages\EditCategoryComponent.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\EditCategoryComponent.razor" />
+  </ItemGroup>-->
+
+  <!--<ItemGroup>
+    <UpToDateCheckInput Remove="Pages\AddCategoryComponent.razor" />
+  </ItemGroup>-->
+
+  <!--<ItemGroup>
+    <None Include="Pages\AddCategoryComponent.razor" />
+  </ItemGroup>-->
 
   <!--<ItemGroup>
     <None Include="Pages\CategoriesComponent.razor" />
