@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Plugins.DataStore.InMemory;
 using UseCases;
 using UseCases.DataStorePluginInterfaces;
+using UseCases.ProductsUseCases;
 using WebApp.Data;
 
 namespace WebApp
@@ -39,6 +40,8 @@ namespace WebApp
             services.AddTransient<IDeleteCategoryUseCase, DeleteCategoryUseCase>();
             services.AddTransient<IViewProductsUseCase, ViewProductsUseCase>();
             services.AddTransient<IAddProductUseCase, AddProductUseCase>();
+            services.AddTransient<IEditProductUseCase, EditProductUseCase>();
+            services.AddTransient<IGetProductByIdUseCase, GetProductByIdUseCase>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
