@@ -1,4 +1,4 @@
-﻿namespace UseCases.ProductsUseCases
+﻿namespace UseCases
 {
     public interface IDeleteProductUseCase
     {

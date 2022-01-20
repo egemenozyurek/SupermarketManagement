@@ -1,7 +1,6 @@
-﻿using CoreBusiness;
-using UseCases.DataStorePluginInterfaces;
+﻿using UseCases.DataStorePluginInterfaces;
 
-namespace UseCases.ProductsUseCases
+namespace UseCases
 {
     public class DeleteProductUseCase : IDeleteProductUseCase
     {

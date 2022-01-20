@@ -41,7 +41,8 @@ namespace Plugins.DataStore.InMemory
 
         public void DeleteProduct(int productId)
         {
-            products?.Remove(GetProductById(productId));
+            var productToDelete = GetProductById(productId);
+            if (productToDelete != null) products.Remove(productToDelete);
         }
 
         public Product GetProductById(int productId)
@@ -52,6 +53,11 @@ namespace Plugins.DataStore.InMemory
         public IEnumerable<Product> GetProducts()
         {
             return products;
+        }
+
+        public IEnumerable<Product> GetProductsByCategoryId(int categoryId)
+        {
+            return products.Where(x => x.CategoryId == categoryId);
         }
 
         public void UpdateProduct(Product product)

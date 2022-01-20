@@ -1,0 +1,77 @@
+﻿@inject IViewCategoriesUseCase ViewCategoriesUseCase
+@inject IViewProductsByCategoryId ViewProductsByCategoryId
+
+<div class="form-group">
+    <label for="category">Category</label>
+    <select class="form-control" id="category" @bind="SelectedCategoryId">
+        <option selected></option>
+        @foreach (var cat in categories)
+        {
+            <option value="@cat.CategoryId">@cat.Name</option>
+        }
+    </select>
+</div>
+@if (productsInCategory != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Prod Name</th>
+                <th>Qty Left</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var prod in productsInCategory)
+            {
+                <tr @onclick="@(() => OnSelectProduct(prod))" 
+                    style="@(prod.ProductId == selectedProductId?"background-color:beige ;cursor:pointer;": "cursor:pointer")">
+                    <td>@prod.Name</td>
+                    <td>@prod.Quantity</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+
+    private IEnumerable<Product> productsInCategory;
+    private int selectedProductId;
+
+    [Parameter]
+    public EventCallback<Product> OnProductSelected { get; set; }
+
+    private int selectedCategoryId;
+    private int SelectedCategoryId
+    {
+        get
+        {
+            return selectedCategoryId;
+        }
+
+        set
+        {
+            selectedCategoryId = value;
+            productsInCategory = ViewProductsByCategoryId.Execute(value);
+            OnSelectProduct(null);
+            StateHasChanged();
+        }
+    }
+
+    private IEnumerable<Category> categories;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        categories = ViewCategoriesUseCase.Execute();
+    }
+
+    private void OnSelectProduct(Product product)
+    {
+        OnProductSelected.InvokeAsync(product);
+        if (product != null) selectedProductId = product.ProductId;
+
+    }
+}
