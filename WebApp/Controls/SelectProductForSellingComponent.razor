@@ -3,7 +3,7 @@
 
 <div class="form-group">
     <label for="category">Category</label>
-    <select class="form-control" id="category" @bind="SelectedCategoryId">
+    <select id="category" @bind="SelectedCategoryId" class="form-control">
         <option selected></option>
         @foreach (var cat in categories)
         {
@@ -23,10 +23,14 @@
         <tbody>
             @foreach (var prod in productsInCategory)
             {
-                <tr @onclick="@(() => OnSelectProduct(prod))" 
-                    style="@(prod.ProductId == selectedProductId?"background-color:beige ;cursor:pointer;": "cursor:pointer")">
-                    <td>@prod.Name</td>
-                    <td>@prod.Quantity</td>
+                <tr @onclick="@(() => OnSelectProduct(prod))"
+                    style="@(prod.ProductId == selectedProductId?"background-color:beige; cursor:pointer;":"cursor:pointer")">
+                    <td>
+                        @prod.Name
+                    </td>
+                    <td>
+                        @prod.Quantity
+                    </td>
                 </tr>
             }
         </tbody>
@@ -49,7 +53,6 @@
         {
             return selectedCategoryId;
         }
-
         set
         {
             selectedCategoryId = value;
@@ -64,7 +67,6 @@
     protected override void OnInitialized()
     {
         base.OnInitialized();
-
         categories = ViewCategoriesUseCase.Execute();
     }
 

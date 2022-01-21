@@ -3,7 +3,7 @@
 
 @if (productToSell != null)
 {
-    @if (!string.IsNullOrEmpty(errorMessage))
+    @if (!string.IsNullOrWhiteSpace(errorMessage))
     {
         <div class="alert alert-danger">@errorMessage</div>
     }
@@ -17,20 +17,24 @@
         </div>
         <div class="form-group">
             <label for="price">Price</label>
-            <input class="form-control" id="price" type="text" readonly value="@(string.Format("{0:c}",productToSell.Price))" />
+            <input class="form-control" id="price" type="text" readonly value="@(string.Format("{0:c}", productToSell.Price))" />
         </div>
         <div class="form-group">
             <label for="qty">Quantity</label>
-            <InputNumber id="qty" @bind-Value="@productToSell.Quantity" class="form-control" />
+            <InputNumber id="qty" @bind-Value="@productToSell.Quantity" class="form-control"></InputNumber>
         </div>
         <button type="submit" class="btn btn-primary">Sell</button>
     </EditForm>
+
+
 }
 
 @code {
-
     private Product productToSell;
     private string errorMessage;
+
+    [Parameter]
+    public string CashierName { get; set; }
 
     [Parameter]
     public Product SelectedProduct { get; set; }
@@ -53,32 +57,35 @@
                 Quantity = 0
             };
         }
-
         else
         {
             productToSell = null;
         }
-
     }
 
     private void SellProduct()
     {
+        if (string.IsNullOrWhiteSpace(CashierName))
+        {
+            errorMessage = "The Cashier's name is missing.";
+            return;
+        }
+
         var product = GetProductByIdUseCase.Execute(productToSell.ProductId);
         if (productToSell.Quantity <= 0)
         {
-            errorMessage = "The quantity has to be greater than zero.";
+            errorMessage = "The quanity has to be greater than zero.";
         }
-
         else if (product.Quantity >= productToSell.Quantity)
         {
             OnProductSold.InvokeAsync(productToSell);
             errorMessage = string.Empty;
-            SellProductUseCase.Execute(productToSell.ProductId, productToSell.Quantity.Value);
+            SellProductUseCase.Execute(CashierName, productToSell.ProductId, productToSell.Quantity.Value);
         }
-
         else
         {
             errorMessage = $"{product.Name} only has {product.Quantity} left. It is not enough.";
         }
     }
+
 }

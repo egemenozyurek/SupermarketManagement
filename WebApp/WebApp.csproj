@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <!--<ItemGroup>
+    <Content Remove="Controls\TodayTransactionsComponent.razor" />
+  </ItemGroup>-->
+
+  <!--<ItemGroup>
     <Content Remove="Pages\EditCategoryComponent.razor" />
   </ItemGroup>-->
 
@@ -27,9 +31,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Controls\TodayTransactionsComponent.razor" />
     <_ContentIncludedByDefault Remove="Pages\AddCategoryComponent.razor" />
     <_ContentIncludedByDefault Remove="Pages\CategoriesComponent.razor" />
     <_ContentIncludedByDefault Remove="Pages\EditCategoryComponent.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Controls\TodayTransactionsComponent.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Controls\TodayTransactionsComponent.razor" />
   </ItemGroup>
 
   <!--<ItemGroup>
